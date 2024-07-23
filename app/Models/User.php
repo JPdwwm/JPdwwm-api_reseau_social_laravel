@@ -44,4 +44,30 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    //Nom au pluriel car un user peut poser plusieurs posts, cardinalité 0,n
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    //Nom au pluriel car un user peut poser plusieurs commentaires, cardinalité 0,n
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    //Nom de la fonction au singulier car un utilisateur n'a qu'un seul rôle, cardinalité 1,1
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this ->role_id == 2;
+    }
 }
