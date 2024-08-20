@@ -9,6 +9,23 @@ class Comment extends Model
 {
     use HasFactory;
 
+            /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'content',
+        'image',
+        'tags',
+        'user_id',
+        'post_id'
+    ];
+
+    //Charger automatiquement l'utilisateur à chaque fois qu'on récupère un commentaire
+
+    // protected $with = ['user','post'];
+
     public function post()
     {
         return $this-> belongsTo(Post::class);
@@ -16,6 +33,6 @@ class Comment extends Model
 
     public function user()
     {
-        return $this-> belongsTo(Iser::class);
+        return $this-> belongsTo(User::class);
     }
 }

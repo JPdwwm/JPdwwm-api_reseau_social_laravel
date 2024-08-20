@@ -9,8 +9,19 @@ class Post extends Model
 {
     use HasFactory;
 
-    //Charger automatiquement l'utilisateur à chaque fois qu'on récupère un message
+        /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'content',
+        'image',
+        'tags',
+        'user_id'
+    ];
 
+    //Charger automatiquement l'utilisateur à chaque fois qu'on récupère un post
     protected $with = ['user'];
 
     //Nom de la fonction au singulier car un seul user, cardinalité 1,1
@@ -20,7 +31,7 @@ class Post extends Model
         return $this -> belongsTo(User::class);
     }
 
-    //Nom de la fonction au plurier car un message peut regrouper plusieurs commentaires
+    //Nom de la fonction au pluriel car un post peut regrouper plusieurs commentaires
 
     public function comments()
     {
